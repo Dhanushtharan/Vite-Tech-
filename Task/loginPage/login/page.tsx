@@ -9,22 +9,16 @@ export default function LoginPage() {
   const [password, setPassword] = useState('')
   const router = useRouter()
 
-  const handleLogin = async () => {
-    const res = await fetch('/api/login', {
-      method: 'POST',
-      body: JSON.stringify({ username, password }),
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    })
+const handleLogin = () => {
+    if (username === 'admin' && password === 'admin123') {
 
-    if (res.ok) {
-      router.push('/dashboard')
+      document.cookie = 'auth=true; path=/; max-age=3600';
+
+      router.push('/dashboard');
     } else {
-      alert('Invalid credentials')
+      alert('Invalid credentials');
     }
-  }
-
+  };
   return (
     <div style={{ padding: '2rem' }}>
       <h2>Login</h2>
