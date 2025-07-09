@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect } from 'react';
+// import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 
 export default function Dashboard() {
@@ -17,17 +17,12 @@ export default function Dashboard() {
   //   checkAuth();
   // }, [router]);
 
-  async function handleLogout() {
-    const res = await fetch('/api/logout', {
-      method: 'POST',
-    });
+   const handleLogout = () => {
+    
+    document.cookie = 'auth=; path=/; max-age=0';
 
-    if(res.redirected) {
-      router.push(res.url);
-    } else {
-      alert('Logout failed');
-    }
-  }
+    router.push('/login');
+  };
 
   return (
     <div style={{ padding: '2rem' }}>
